@@ -1,0 +1,30 @@
+name: easypeasy_sdk
+description: A new Flutter package project.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^4.0.6
+  image: ^3.2.2
+  path: ^1.8.2
+  xml2json: ^5.3.5
+  yaml: ^3.1.1
+  args: ^2.3.1
+  http: ^0.13.5
+  dcli: ^1.35.4
+  url_launcher: ^6.1.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.2.16
+  flutter_launcher_icons: ^0.11.0
+
+executables:
+  easypeasy_sdk: easypeasy_sdk_run
