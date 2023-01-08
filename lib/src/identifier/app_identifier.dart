@@ -1,3 +1,4 @@
+import '../utils/platforms_path_utils.dart';
 import 'file_path.dart';
 
 class AppIdentifier {
@@ -10,23 +11,20 @@ class AppIdentifier {
     required this.value,
   });
 
-  Future<bool> runAsync() async {
-    for (FilePath file in replacementFiles) {
+  Future<void> runAsync() async {
+    await Future.forEach(replacementFiles, (file) async {
       await file.run(value);
-    }
-
-    return true;
+    });
   }
 }
 
 class PackageName extends AppIdentifier {
   PackageName({
     required String path,
-    required List<FilePath> replacementFiles,
     required value,
   }) : super(
           path: path,
-          replacementFiles: replacementFiles,
+          replacementFiles: PlatformAndroidPathUtils.identifier(path),
           value: value,
         );
 }
@@ -34,11 +32,10 @@ class PackageName extends AppIdentifier {
 class BundleIdentifier extends AppIdentifier {
   BundleIdentifier({
     required String path,
-    required List<FilePath> replacementFiles,
     required value,
   }) : super(
           path: path,
-          replacementFiles: replacementFiles,
+          replacementFiles: PlatformIOSPathUtils.identifier(path),
           value: value,
         );
 }

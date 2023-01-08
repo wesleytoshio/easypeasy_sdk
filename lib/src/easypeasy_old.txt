@@ -1,0 +1,108 @@
+/// A Calculator.
+class EasypeasySDK2 implements EasypeasyBase {
+  final ProjectSettingsEntity data;
+  final void Function(String) onChangedState;
+  final bool android;
+  final bool ios;
+  EasypeasySDK2({
+    required this.onChangedState,
+    required this.data,
+    this.android = true,
+    this.ios = true,
+  });
+
+  @override
+  Future<void> run() async {
+    // await runResources();
+    // await runPubspec();
+    // await runAppIdentifier();
+    // await runSplash();
+    // await runIcon();
+    // await runDeepLinking();
+  }
+
+  @override
+  Future<void> runAppIdentifier() async {
+    onChangedState('Working with app identifers...');
+
+    /// Working with [Android]
+    if (android) {
+      PackageName(
+        value: data.app!.packageName,
+        path: data.androidDir,
+      ).runAsync();
+
+      /// Working only with [Android]
+      runKeystore();
+    }
+
+    /// Working with [IOS]
+    if (ios) {
+      BundleIdentifier(
+        value: data.app!.bundleIdentifier!,
+        path: data.iosDir,
+      ).runAsync();
+    }
+  }
+
+  @override
+  Future<void> runPubspec() async {
+    onChangedState('Working with Pubspec...');
+  }
+
+  @override
+  Future<void> runIcon() async {
+    onChangedState('Working with Launcher Icon...');
+  }
+
+  ///Only Android
+  @override
+  Future<void> runKeystore() async {
+    onChangedState('Working with Keystore [Android]...');
+  }
+
+  @override
+  Future<void> runSplash() async {
+    onChangedState('Working with Splash Screen...');
+  }
+
+  @override
+  Future<void> runResources() async {
+    onChangedState('Downloading media resources...');
+    if (!Directory(data.resources).existsSync()) {
+      createDir(data.resources, recursive: true);
+    }
+    Resources resources = Resources(
+      output: data.resources,
+      resources: [
+        ResourceModel(
+          url:
+              'https://static-cdn.jtvnw.net/jtv_user_pictures/36e2e2aa-55f7-4e92-b5bb-e8ab4cbcb529-profile_image-70x70.png',
+          name: 'icon.png',
+        ),
+        ResourceModel(
+          url:
+              'https://static-cdn.jtvnw.net/jtv_user_pictures/36e2e2aa-55f7-4e92-b5bb-e8ab4cbcb529-profile_image-70x70.png',
+          name: 'adaptiveIconBackground.png',
+        ),
+        ResourceModel(
+          url:
+              'https://static-cdn.jtvnw.net/jtv_user_pictures/36e2e2aa-55f7-4e92-b5bb-e8ab4cbcb529-profile_image-70x70.png',
+          name: 'splash.png',
+        ),
+        ResourceModel(
+          url:
+              'https://static-cdn.jtvnw.net/jtv_user_pictures/36e2e2aa-55f7-4e92-b5bb-e8ab4cbcb529-profile_image-70x70.png',
+          name: 'keytore.jks',
+        ),
+      ],
+    );
+
+    await resources.runAsync();
+  }
+
+  @override
+  Future<void> runDeepLinking() async {
+    onChangedState('Working with Deep linking...');
+  }
+}

@@ -10,11 +10,11 @@ class Resources {
   });
 
   Future<void> runAsync() async {
-    for (final res in resources) {
-      FileUtils.downloadFileNetwork(
+    await Future.forEach(resources, (res) async {
+      await FileUtils.downloadFileNetwork(
         res.url,
         '$output/${res.name}',
       );
-    }
+    });
   }
 }

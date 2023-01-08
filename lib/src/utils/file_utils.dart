@@ -100,7 +100,7 @@ class FileUtils {
     http.Response response = await http.get(Uri.parse(url));
     File file = File(path);
     file.createSync(recursive: true);
-    return file.writeAsBytes(response.bodyBytes);
+    return await file.writeAsBytes(response.bodyBytes);
   }
 
   static String fileName(String path) => path.split('/').last;
